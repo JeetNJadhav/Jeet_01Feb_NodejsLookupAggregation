@@ -1,0 +1,120 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "JSONPlaceholder",
+    "description": "Fake Online REST API for Testing and Prototyping",
+    "version": "0.0.1"
+  },
+  "schemes": ["http"],
+  "host": "localhost:8080",
+  "basePath": "/",
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/usercomments": {
+      "get": {
+        "tags": ["UsersComments"],
+        "summary": "Show comments",
+        "description": "List all comments of each user",
+        "responses": {
+          "200": {
+            "description": "List all comments of each user",
+            "$ref": "#/definitions/Comments"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
+    "/addUser": {
+      "post": {
+        "summary": "Post Request Endpoint",
+        "description": "This endpoint is used to send data through a POST request.",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "data",
+            "description": "Data to be sent in the POST request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/adduser"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/adduserResp"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Comments": {
+      "type": "object",
+      "message": {
+        "type": "array",
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "adduser": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "adduserResp": {
+      "type": "object",
+      "message": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "_id": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
